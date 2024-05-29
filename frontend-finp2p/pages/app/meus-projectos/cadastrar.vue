@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { toast } from "vue3-toastify";
+import { onClickOutside } from "@vueuse/core";
 
 definePageMeta({
   middleware: ["auth"],
 });
+
+const modal = ref(false);
+const target = ref<HTMLElement | null>(null);
+onClickOutside(target, () => (modal.value = false));
 
 const form = ref({
   name: "",
@@ -32,12 +37,9 @@ async function onSubmit() {
     body: formData,
     onResponse: ({ response, error }) => {
       loading.value = false;
-      
+
       if (response.ok) {
-        toast.success("Projecto criado com sucesso!");
-        setTimeout(() => {
-          navigateTo("/app/meus-projectos");
-        }, 3000);
+        modal.value = true;
 
         return;
       }
@@ -164,5 +166,48 @@ function onLoadImage(e) {
         </form>
       </div>
     </section>
+
+    <div
+      v-if="modal"
+      class="w-screen h-screen fixed top-0 left-0 z-50 bg-black/50"
+    >
+      <div class="w-screen h-screen flex justify-center items-center p-6">
+        <div ref="target" class="bg-white max-w-xl p-4 rounded-xl">
+          <h3 class="font-medium text-center">
+            Parabéns! Seu Projeto foi Registrado com Sucesso! 🎉
+          </h3>
+
+          <hr class="my-3" />
+
+          <p class="mb-1">
+            Em breve, nossa equipe realizará uma avaliação detalhada do seu
+            projeto. Nos próximos 48 horas, vamos analisar cuidadosamente seu
+            potencial e impacto.
+          </p>
+          <p class="mb-1">
+            ✅ Se tudo estiver em conformidade, avançaremos com a aprovação do
+            seu projeto, permitindo que você dê o próximo passo rumo ao sucesso.
+          </p>
+          <p>
+            🌟 Obrigado por escolher nossa plataforma para dar vida às suas
+            ideias. Estamos aqui para apoiá-lo em cada etapa do processo.
+          </p>
+
+          <hr class="my-3" />
+
+          <button
+            @click="
+              () => {
+                modal = false;
+                navigateTo('/app/meus-projectos');
+              }
+            "
+            class="px-4 py-2.5 rounded-md text-white bg-brand-primary transition-all hover:bg-brand-primary-darker"
+          >
+            Compreendi
+          </button>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
