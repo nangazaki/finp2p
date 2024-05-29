@@ -2,7 +2,7 @@
 import { format } from "date-fns";
 
 const { data } = await useFetch(
-  `http://localhost:4000/api/users/${useRoute().params.id}`,
+  `https://finp2p.onrender.com/api/users/${useRoute().params.id}`,
   {
     method: "GET",
   }

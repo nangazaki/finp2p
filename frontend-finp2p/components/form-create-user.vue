@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { navigateTo } from "#imports";
 import { toast } from "vue3-toastify";
 
 const step = ref(1);
@@ -23,7 +22,7 @@ const onSubmit = async () => {
   loading.value = true;
 
   const { data, status, error } = await useFetch(
-    "http://localhost:4000/api/users",
+    "https://finp2p.onrender.com/api/users",
     {
       method: "POST",
       body: {

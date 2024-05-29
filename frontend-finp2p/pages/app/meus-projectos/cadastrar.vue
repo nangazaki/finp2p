@@ -24,7 +24,7 @@ async function onSubmit() {
   formData.append("image", form.value.image);
   formData.append("description", form.value.description);
 
-  await useFetch("http://localhost:4000/api/project", {
+  await useFetch("https://finp2p.onrender.com/api/project", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${authCookie.getToken()}`,

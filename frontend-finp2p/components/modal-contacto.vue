@@ -20,7 +20,7 @@ async function onSubmit() {
   loading.value = true;
 
   const { status, error } = await useFetch(
-    "http://localhost:4000/api/feedback",
+    "https://finp2p.onrender.com/api/feedback",
     {
       method: "POST",
       body: form.value,

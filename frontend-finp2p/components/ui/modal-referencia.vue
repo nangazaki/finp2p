@@ -27,7 +27,7 @@ async function onSubmit() {
   loading.value = true;
 
   const { data, status, error } = await useFetch<number>(
-    "http://localhost:4000/api/investments/generate-reference",
+    "https://finp2p.onrender.com/api/investments/generate-reference",
     {
       method: "POST",
       headers: {

@@ -16,7 +16,7 @@ const res = ref<IRes>({
   meta: {},
 });
 
-const { data } = await useFetch<IRes>("http://localhost:4000/api/users?page=1");
+const { data } = await useFetch<IRes>("https://finp2p.onrender.com/api/users?page=1");
 res.value = data.value;
 
 definePageMeta({
@@ -27,7 +27,7 @@ async function next() {
   const nextPage = Number(res.value.meta.currentPage) + 1;
 
   const { data } = await useFetch<IRes>(
-    `http://localhost:4000/api/users?page=${nextPage}`
+    `https://finp2p.onrender.com/api/users?page=${nextPage}`
   );
 
   res.value = data.value;
@@ -37,7 +37,7 @@ async function previous() {
   const prevPage = Number(res.value.meta.currentPage) - 1;
 
   const { data } = await useFetch<IRes>(
-    `http://localhost:4000/api/users?page=${prevPage}`
+    `https://finp2p.onrender.com/api/users?page=${prevPage}`
   );
 
   res.value = data.value;
@@ -89,39 +89,48 @@ async function previous() {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(u, idx) in res.data" :key="idx">
-                <td class="px-4 p-2.5 border-b border-neutral-200">
-                  <p class="antialiased font-normal text-neutral-600">
-                    {{ u.firstName }} {{ u.lastName }}
-                  </p>
-                </td>
-                <td class="px-4 p-2.5 border-b border-neutral-200">
-                  <p class="antialiased font-normal text-neutral-600">
-                    {{ u.email }}
-                  </p>
-                </td>
-                <td class="px-4 p-2.5 border-b border-neutral-200">
-                  <p class="antialiased font-normal text-neutral-600">
-                    {{ u.accountType }}
-                  </p>
-                </td>
-                <td class="px-4 p-2.5 border-b border-neutral-200">
-                  <div class="flex gap-2">
-                    <nuxt-link :to="{ path: `/app/utilizadores/${u.id}` }">
+              <template v-if="res.data.length > 0">
+                <tr v-for="(u, idx) in res.data" :key="idx">
+                  <td class="px-4 p-2.5 border-b border-neutral-200">
+                    <p class="antialiased font-normal text-neutral-600">
+                      {{ u.firstName }} {{ u.lastName }}
+                    </p>
+                  </td>
+                  <td class="px-4 p-2.5 border-b border-neutral-200">
+                    <p class="antialiased font-normal text-neutral-600">
+                      {{ u.email }}
+                    </p>
+                  </td>
+                  <td class="px-4 p-2.5 border-b border-neutral-200">
+                    <p class="antialiased font-normal text-neutral-600">
+                      {{ u.accountType }}
+                    </p>
+                  </td>
+                  <td class="px-4 p-2.5 border-b border-neutral-200">
+                    <div class="flex gap-2">
+                      <nuxt-link :to="{ path: `/app/utilizadores/${u.id}` }">
+                        <button
+                          class="block antialiased text-white font-medium bg-brand-primary p-2 rounded-md"
+                        >
+                          Visualizar
+                        </button>
+                      </nuxt-link>
                       <button
-                        class="block antialiased text-white font-medium bg-brand-primary p-2 rounded-md"
+                        class="block antialiased font-medium text-red-500 p-2 rounded-md transition-all hover:bg-red-100"
                       >
-                        Visualizar
+                        Deletar
                       </button>
-                    </nuxt-link>
-                    <button
-                      class="block antialiased font-medium text-red-500 p-2 rounded-md transition-all hover:bg-red-100"
-                    >
-                      Deletar
-                    </button>
-                  </div>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+              <template v-else>
+              <tr>
+                <td colspan="4" class="h-64 text-center">
+                  <p>Nenhum utilizador cadastrado no momento!</p>
                 </td>
               </tr>
+            </template>
             </tbody>
             <tfoot>
               <tr>

@@ -11,7 +11,7 @@ onClickOutside(target, () => {
 });
 
 function onSubmit() {
-  // Chamada a API
+  // Chamada 
 }
 </script>
 

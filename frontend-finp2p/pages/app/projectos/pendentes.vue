@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: Projects } = await useFetch(
-  "http://localhost:4000/api/project/rejecteds"
+  "https://finp2p.onrender.com/api/project/rejecteds"
 );
 
 console.log(Projects.value);
