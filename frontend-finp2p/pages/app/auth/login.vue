@@ -13,7 +13,9 @@ const form = ref({
   password: "",
 });
 
+const loading = ref(false);
 const onSubmit = async () => {
+  loading.value = true;
   const { data, status, error } = await useFetch<{
     userInfo: User;
     token: string;
@@ -23,6 +25,7 @@ const onSubmit = async () => {
       ...form.value,
     },
   });
+  loading.value = false;
 
   if (status.value === "success") {
     toast.success("Seja bem-vindo de volta!");
@@ -108,16 +111,10 @@ const onSubmit = async () => {
               <div class="flex">
                 <button
                   type="submit"
-                  class="group flex-1 flex items-center justify-center gap-2 leading-none py-2.5 border-2 border-brand-primary bg-brand-primary text-lg text-white rounded-md hover:bg-brand-primary-darker focus:outline-none"
+                  class="flex-1 flex items-center justify-center gap-2 leading-none py-2.5 border-2 border-brand-primary bg-brand-primary text-lg text-white rounded-md hover:bg-brand-primary-darker focus:outline-none"
                 >
-                  <Icon
-                    name="heroicons:lock-closed"
-                    class="!block group-hover:!hidden"
-                  />
-                  <Icon
-                    name="heroicons:lock-open"
-                    class="!hidden group-hover:!block"
-                  />
+                  <Icon v-show="!loading" name="heroicons:lock-closed" />
+                  <Icon v-show="loading" name="svg-spinners:ring-resize" />
                   Enviar
                 </button>
               </div>
