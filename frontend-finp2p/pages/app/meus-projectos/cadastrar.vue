@@ -29,24 +29,25 @@ async function onSubmit() {
   formData.append("image", form.value.image);
   formData.append("description", form.value.description);
 
-  await useFetch("https://finp2p.onrender.com/api/project", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${authCookie.getToken()}`,
-    },
-    body: formData,
-    onResponse: ({ response, error }) => {
-      loading.value = false;
+  const { status, error } = await useFetch(
+    "https://finp2p.onrender.com/api/project",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authCookie.getToken()}`,
+      },
+      body: formData,
+    }
+  );
 
-      if (response.ok) {
-        modal.value = true;
+  loading.value = false;
 
-        return;
-      }
+  if (status.value === "success") {
+    modal.value = true;
+    return;
+  }
 
-      toast.error("Não foi possível criar o projecto");
-    },
-  });
+  toast.error(error.value?.data.message);
 }
 
 function onLoadImage(e) {
