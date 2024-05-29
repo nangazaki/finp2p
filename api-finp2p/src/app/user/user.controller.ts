@@ -44,12 +44,12 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
-  @Patch('active')
+  @Patch('active/:id')
   activeAcount(@Param('id') id: string) {
     return this.userService.activeAccount(id);
   }
 
-  @Patch('disable')
+  @Patch('disable/:id')
   disableAcount(@Param('id') id: string) {
     return this.userService.disableAccount(id);
   }
