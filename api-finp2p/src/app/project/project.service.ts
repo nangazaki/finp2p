@@ -24,7 +24,7 @@ export class ProjectService {
         createProjectDto.amountRequired < 0
       ) {
         throw new BadRequestException(
-          'O valor do projecto deve estar entre 20M e 500K',
+          'O valor do projecto deve estar entre 20 Milhões e 500 mil kwanzas',
         );
       }
 
