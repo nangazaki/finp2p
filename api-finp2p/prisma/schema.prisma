@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountType {
+  particular
+  state_owned
+  financial
+}
+
+model User {
+  id          String       @id @default(uuid())
+  firstName   String       @map("first_name")
+  lastName    String       @map("last_name")
+  email       String       @unique
+  password    String
+  isAdmin     Boolean      @default(false)
+  investments Investment[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  accountType AccountType?
+
+  entity Entity?
+
+  updatedAt        DateTime           @updatedAt
+  ReferencePayment ReferencePayment[]
+
+  @@map("users")
+}
+
+model Entity {
+  id String @id @default(uuid())
+
+  nif      String  @unique
+  name     String
+  email    String  @unique
+  ministry String?
+  userId   String  @unique
+
+  user    User      @relation(fields: [userId], references: [id])
+  Project Project[]
+
+  @@map("entities")
+}
+
+enum ProjectCollectionMethod {
+  donation
+  investment
+}
+
+model Project {
+  id String @id @default(uuid())
+
+  name             String
+  description      String                  @db.Text
+  type             String
+  image            String
+  local            String
+  status           ProjectStatus
+  collectionMethod ProjectCollectionMethod
+  amountRequired   Float
+  amountCollected  Float
+
+  rejectionReason String?
+  isApproved      Boolean @default(false)
+  entityId        String
+
+  investiment      Investment[]
+  ReferencePayment ReferencePayment[]
+  ProjectOperation ProjectOperation[]
+  entity           Entity             @relation(fields: [entityId], references: [id])
+
+  createdAt                           DateTime                              @default(now())
+  updatedAt                           DateTime                              @updatedAt
+  ReferencePaymentFromProjectToSystem ReferencePaymentFromProjectToSystem[]
+
+  @@map("projects")
+}
+
+enum ProjectStatus {
+  progress
+  concluded
+}
+
+model ProjectOperation {
+  id String @id @default(uuid())
+
+  value Float
+
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("project_operataions")
+}
+
+model Investment {
+  id String @id @default(uuid())
+
+  projectId    String @unique
+  userId       String @unique
+  amount       Float
+  comporvativo String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+
+  @@map("investments")
+}
+
+model ReferencePayment {
+  id String @id @default(cuid())
+
+  reference Int     @unique
+  wasPaid   Boolean @default(false)
+  amount    Float
+  userId    String
+  projectId String
+
+  user    User    @relation(fields: [userId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+}
+
+model ReferencePaymentFromProjectToSystem {
+  id String @id @default(cuid())
+
+  amount    Float
+  reference Int    @unique
+  projectId String @unique
+
+  project             Project               @relation(fields: [projectId], references: [id])
+  paymentInstallments paymentInstallments[]
+}
+
+model paymentInstallments {
+  id Int @id @default(autoincrement())
+
+  comprovativo                          String
+  amount                                Float
+  referencePaymentFromProjectToSystemId String
+  createdAt                             DateTime @default(now())
+
+  reference ReferencePaymentFromProjectToSystem @relation(fields: [referencePaymentFromProjectToSystemId], references: [id])
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  name    String
+  email   String
+  message String
+}

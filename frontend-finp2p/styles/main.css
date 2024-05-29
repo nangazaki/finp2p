@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-[15px];
+}
+
+.smoth-scroll {
+  &::-webkit-scrollbar {
+    @apply w-1;
+  }
+  &::-webkit-scrollbar-track {
+    @apply bg-[#f1f1f1];
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300;
+  }
+}
+
+.app {
+  background-image: url("/images/bg-themes/1.png");
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background 0.3s;
+
+  @apply flex w-full h-screen overflow-hidden;
+}
+
+.sidebar {
+  @apply w-[70px] overflow-y-auto bg-[#00000026];
+  background: rgb(0 0 0 / 15%);
+  border-right: 1px solid rgb(255 255 255 / 15%);
+  z-index: 11;
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.12) !important;
+  transition: all 0.2s ease-out;
+}
+
+.sidebar-header {
+  @apply w-full h-[60px] sticky flex items-center px-4 bg-[#ffffff26] border-b border-[#ffffff1f];
+}
+
+.logo-icon {
+  width: 30px;
+}
+
+.logo-text {
+  @apply text-[22px] text-white ml-2.5 mb-0;
+  letter-spacing: 1px;
+}
+
+.metismenu {
+  @apply h-[calc(100vh-60px)] bg-transparent p-2.5 flex flex-col overflow-hidden overflow-y-auto mt-0 smoth-scroll;
+}
+
+.sidebar-wrapper .metismenu li + li {
+  margin-top: 5px;
+}
+
+.sidebar-wrapper .metismenu li:first-child {
+  margin-top: 5px;
+}
+
+.sidebar-wrapper .metismenu li:last-child {
+  margin-bottom: 5px;
+}
+
+.sidebar-wrapper .metismenu > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+}
+
+.sidebar-wrapper .metismenu a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 8px 15px;
+  font-size: 15px;
+  color: rgb(255 255 255 / 75%);
+  outline-width: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  border: 1px solid #ffffff00;
+  transition: all 0.3s ease-out;
+}
+
+.sidebar-wrapper .metismenu a .parent-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.sidebar-wrapper .metismenu a .menu-title {
+  margin-left: 10px;
+}
+
+.sidebar-wrapper .metismenu ul a {
+  padding: 6px 15px 6px 15px;
+  font-size: 15px;
+  border: 0;
+}
+
+.sidebar-wrapper .metismenu ul a i {
+  margin-right: 10px;
+}
+
+.sidebar-wrapper .metismenu ul {
+  border: 1px solid rgb(255 255 255 / 12%);
+  background: rgb(255 255 255 / 10%);
+}
+
+.sidebar-wrapper .metismenu ul ul a {
+  padding: 8px 15px 8px 30px;
+}
+
+.sidebar-wrapper .metismenu ul ul ul a {
+  padding: 8px 15px 8px 45px;
+}
+
+.sidebar-wrapper .metismenu .mm-active > a,
+.sidebar-wrapper .metismenu a:active,
+.sidebar-wrapper .metismenu a:focus,
+.sidebar-wrapper .metismenu a:hover {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  background: rgb(255 255 255 / 15%);
+}
+
+.menu-label {
+  padding: 20px 15px 5px 5px;
+
+  color: #b0afaf;
+
+  text-transform: uppercase;
+
+  font-size: 12px;
+
+  letter-spacing: 0.5px;
+}
+
+.metismenu .has-arrow:after {
+  position: absolute;
+
+  content: "";
+
+  width: 0.5em;
+
+  height: 0.5em;
+
+  border-style: solid;
+
+  border-width: 1.2px 0 0 1.2px;
+
+  border-color: initial;
+
+  right: 15px;
+
+  transform: rotate(-45deg) translateY(-50%);
+
+  transform-origin: top;
+
+  top: 50%;
+
+  transition: all 0.3s ease-out;
+}

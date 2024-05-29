@@ -1,0 +1,45 @@
+POST http://localhost:4000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "finp2p@gmail.com",
+  "password": "123456789"
+}
+
+####
+
+GET http://localhost:4000/api/auth/user-logged
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTE0YzgzNy00NGMyLTQ4ZTYtOWFlMS0xNzEyZjgxM2VmNmQiLCJlbWFpbCI6ImZpbnAycEBnbWFpbC5jb20iLCJpYXQiOjE3MTY3OTgyNjgsImV4cCI6MTcxNjgzNDI2OH0.SmLvduz8FIrP5bb6prsS3pr9w_nWykikYVxum2cR5iI
+
+####
+
+GET http://localhost:4000/api/project
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTE0YzgzNy00NGMyLTQ4ZTYtOWFlMS0xNzEyZjgxM2VmNmQiLCJlbWFpbCI6ImZpbnAycEBnbWFpbC5jb20iLCJpYXQiOjE3MTY3OTgyNjgsImV4cCI6MTcxNjgzNDI2OH0.SmLvduz8FIrP5bb6prsS3pr9w_nWykikYVxum2cR5iI
+
+####
+
+POST http://localhost:4000/api/users
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTE0YzgzNy00NGMyLTQ4ZTYtOWFlMS0xNzEyZjgxM2VmNmQiLCJlbWFpbCI6ImZpbnAycEBnbWFpbC5jb20iLCJpYXQiOjE3MTY3OTgyNjgsImV4cCI6MTcxNjgzNDI2OH0.SmLvduz8FIrP5bb6prsS3pr9w_nWykikYVxum2cR5iI
+
+{
+  "firstName": "John",
+  "lastName": "Mendova",
+  "email": "mendova@gmail.com",
+  "password": "123456789",
+  "accountType": "particular"
+}
+
+####
+
+GET http://localhost:4000/api/users
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTE0YzgzNy00NGMyLTQ4ZTYtOWFlMS0xNzEyZjgxM2VmNmQiLCJlbWFpbCI6ImZpbnAycEBnbWFpbC5jb20iLCJpYXQiOjE3MTY3OTgyNjgsImV4cCI6MTcxNjgzNDI2OH0.SmLvduz8FIrP5bb6prsS3pr9w_nWykikYVxum2cR5iI
+
+####
+
+GET http://localhost:4000/api/users/61ba717d-bd2a-4944-9c97-b7c499221565
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTE0YzgzNy00NGMyLTQ4ZTYtOWFlMS0xNzEyZjgxM2VmNmQiLCJlbWFpbCI6ImZpbnAycEBnbWFpbC5jb20iLCJpYXQiOjE3MTY3OTgyNjgsImV4cCI6MTcxNjgzNDI2OH0.SmLvduz8FIrP5bb6prsS3pr9w_nWykikYVxum2cR5iI
