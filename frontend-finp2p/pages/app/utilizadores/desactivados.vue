@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { toast } from "vue3-toastify";
+
 interface IRes {
   data: [];
   meta: {
@@ -17,7 +19,7 @@ const res = ref<IRes>({
 });
 
 const { data } = await useFetch<IRes>(
-  "https://finp2p.onrender.com/api/users?page=1"
+  "https://finp2p.onrender.com/api/users/disables?page=1"
 );
 res.value = data.value;
 
@@ -29,7 +31,7 @@ async function next() {
   const nextPage = Number(res.value.meta.currentPage) + 1;
 
   const { data } = await useFetch<IRes>(
-    `https://finp2p.onrender.com/api/users?page=${nextPage}`
+    `https://finp2p.onrender.com/api/users/disables?page=${nextPage}`
   );
 
   res.value = data.value;
@@ -39,10 +41,31 @@ async function previous() {
   const prevPage = Number(res.value.meta.currentPage) - 1;
 
   const { data } = await useFetch<IRes>(
-    `https://finp2p.onrender.com/api/users?page=${prevPage}`
+    `https://finp2p.onrender.com/api/users/disables?page=${prevPage}`
   );
 
   res.value = data.value;
+}
+
+const loading = ref(false);
+async function onEnableAccount(id: string) {
+  loading.value = true;
+
+  const { status } = useFetch(
+    `https://finp2p.onrender.com/api/users/active/${id}`,
+    {
+      method: "PATCH",
+    }
+  );
+
+  loading.value = false;
+
+  if (status.value === "success") {
+    toast.success("Conta activada com sucesso!");
+    return;
+  }
+
+  toast.error("Não foi possível activar a conta!");
 }
 </script>
 
@@ -110,13 +133,13 @@ async function previous() {
                   </td>
                   <td class="px-4 p-2.5 border-b border-neutral-200">
                     <div class="flex gap-2">
-                      <nuxt-link :to="{ path: `/app/utilizadores/${u.id}` }">
-                        <button
-                          class="block antialiased text-white font-medium bg-brand-primary p-2 rounded-md"
-                        >
-                          Activar
-                        </button>
-                      </nuxt-link>
+                      <button
+                        @click="onEnableAccount(u.id)"
+                        class="block antialiased text-white font-medium bg-brand-primary p-2 rounded-md"
+                      >
+                        <Icon v-if="loading" name="svg-spinners:ring-resize" />
+                        Activar
+                      </button>
                     </div>
                   </td>
                 </tr>

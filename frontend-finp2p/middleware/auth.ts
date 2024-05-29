@@ -18,7 +18,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (status.value !== "success") {
       authCookie.deleteToken();
 
-      console.log("object");
       return navigateTo("/app/auth/login", { replace: true });
     }
 
@@ -33,6 +32,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       isAdmin: data.value?.isAdmin,
       password: data.value?.password,
       updatedAt: data.value?.updatedAt,
+      accountVerify: data.value?.accountVerify,
     });
   } else {
     authCookie.deleteToken();
