@@ -93,7 +93,7 @@ definePageMeta({
               </td>
               <td class="px-4 p-2.5 border-b border-neutral-200">
                 <p class="antialiased font-normal text-neutral-600">
-                  AOA {{ project.amountRequired }}
+                  {{ currencyFormat(project.amountRequired) }}
                 </p>
               </td>
               <td class="px-4 p-2.5 border-b border-neutral-200 flex gap-2">

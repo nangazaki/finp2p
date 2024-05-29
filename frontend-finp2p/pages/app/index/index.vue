@@ -9,7 +9,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="page-content">
+  <div class="page-content min-h-[85vh]">
     <div class="text-white row row-cols-1 row-cols-md-2 row-cols-xl-4">
       <div class="col">
         <div class="card min-h-32 radius-10 bg-gradient bg-sky-600">

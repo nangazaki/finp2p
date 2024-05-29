@@ -16,7 +16,9 @@ const res = ref<IRes>({
   meta: {},
 });
 
-const { data } = await useFetch<IRes>("https://finp2p.onrender.com/api/users?page=1");
+const { data } = await useFetch<IRes>(
+  "https://finp2p.onrender.com/api/users?page=1"
+);
 res.value = data.value;
 
 definePageMeta({
@@ -51,38 +53,7 @@ async function previous() {
     </div>
 
     <section class="mt-4 mb-8">
-      <h3 class="mb-4">Utilizadores</h3>
-
-      <div class="flex justify-between h-10 mb-4">
-        <form
-          class="relative max-w-md w-full h-10 bg-white flex !border border-brand-primary/20 rounded overflow-hidden shadow-sm"
-        >
-          <input
-            type="text"
-            class="flex-1 pl-2 placeholder:!text-neutral-900 focus:outline-brand-primary"
-            placeholder="Pesquisar utilizador"
-          />
-          <button
-            class="absolute right-0 w-32 h-full bg-brand-primary px-4 text-center text-white hover:bg-brand-primary-darker focus:outline-none"
-          >
-            Pesquisar
-          </button>
-        </form>
-
-        <div class="flex gap-3">
-          <nuxt-link
-            to="/app/utilizadores/desactivados"
-            class="flex px-4 items-center bg-brand-primary/90 text-white rounded-md transition-all hover:bg-brand-primary-darker"
-          >
-            Contas por activar
-          </nuxt-link>
-          <button
-            class="h-10 p-2 !border rounded-md hover:bg-brand-primary/10 shadow-sm"
-          >
-            <Icon name="heroicons:ellipsis-vertical-20-solid" />
-          </button>
-        </div>
-      </div>
+      <h3 class="mb-4">Utilizadores Desactivados</h3>
 
       <div class="w-full grid grid-cols-12">
         <div class="col-span-12">
@@ -143,25 +114,20 @@ async function previous() {
                         <button
                           class="block antialiased text-white font-medium bg-brand-primary p-2 rounded-md"
                         >
-                          Visualizar
+                          Activar
                         </button>
                       </nuxt-link>
-                      <button
-                        class="block antialiased font-medium text-red-500 p-2 rounded-md transition-all hover:bg-red-100"
-                      >
-                        Deletar
-                      </button>
                     </div>
                   </td>
                 </tr>
               </template>
               <template v-else>
-              <tr>
-                <td colspan="4" class="h-64 text-center">
-                  <p>Nenhum utilizador cadastrado no momento!</p>
-                </td>
-              </tr>
-            </template>
+                <tr>
+                  <td colspan="4" class="h-64 text-center">
+                    <p>Nenhum utilizador cadastrado no momento!</p>
+                  </td>
+                </tr>
+              </template>
             </tbody>
             <tfoot>
               <tr>

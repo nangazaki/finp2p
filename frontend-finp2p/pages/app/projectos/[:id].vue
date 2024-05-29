@@ -116,7 +116,7 @@ definePageMeta({
 
               <div class="flex flex-col">
                 <nuxt-link
-                  to="/app/projectos/movimentos/slsjlkds"
+                  to="#"
                   class="text-neutral-700 hover:text-brand-primary"
                 >
                   Ver Histórico de Pagamentos
@@ -133,21 +133,23 @@ definePageMeta({
                 relacionadas ao investivestimentos e activos.
               </p>
 
-              <button
-                v-if="project.amountRequired - project.amountCollected !== 0"
-                @click="useAppModalStore().onModalReference(true)"
-                class="mb-2 px-4 py-2.5 rounded-md text-brand-primary !border border-brand-primary transition-all hover:bg-brand-primary hover:text-white"
-              >
-                Gerar Referência
-              </button>
+              <div class="flex gap-2 flex-wrap">
+                <button
+                  v-if="project.amountRequired - project.amountCollected !== 0"
+                  @click="useAppModalStore().onModalReference(true)"
+                  class="px-4 py-2.5 rounded-md text-brand-primary !border border-brand-primary transition-all hover:bg-brand-primary hover:text-white"
+                >
+                  Gerar Referência
+                </button>
 
-              <button
-                v-if="project.amountRequired - project.amountCollected !== 0"
-                @click="useAppModalStore().onModalInvestir({ state: true })"
-                class="px-4 py-2.5 rounded-md text-white bg-brand-primary transition-all hover:bg-brand-primary-darker"
-              >
-                Invistir no projecto
-              </button>
+                <button
+                  v-if="project.amountRequired - project.amountCollected !== 0"
+                  @click="useAppModalStore().onModalInvestir({ state: true })"
+                  class="px-4 py-2.5 rounded-md text-white bg-brand-primary transition-all hover:bg-brand-primary-darker"
+                >
+                  Invistir no projecto
+                </button>
+              </div>
             </div>
           </div>
         </div>

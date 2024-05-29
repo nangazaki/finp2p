@@ -9,6 +9,7 @@ export type User = {
   accountType: any;
   updatedAt: string;
   entity: any;
+  accountVerify: boolean;
 };
 
 export type UserLogged = {
