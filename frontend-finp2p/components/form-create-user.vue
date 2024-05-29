@@ -35,16 +35,15 @@ const onSubmit = async () => {
   loading.value = false;
 
   if (status.value === "success") {
-    toast.success("Conta criada com sucesso!", {});
-
-    setTimeout(() => {
-      navigateTo("/app/auth/login");
-    }, 3000);
+    modal.value = true;
     return;
   }
 
-  toast.error(error.value?.data);
+  toast.error(error.value?.data.message);
 };
+
+const modal = ref(false);
+const target = ref<HTMLElement | null>(null);
 </script>
 
 <template>
@@ -236,7 +235,8 @@ const onSubmit = async () => {
         @click="() => (form.accountType === 'particular' ? '' : (step += 1))"
         class="group flex-1 flex items-center justify-center gap-2 leading-none py-2.5 border-2 border-brand-primary bg-brand-primary text-lg text-white rounded-md hover:bg-brand-primary-darker focus:outline-none"
       >
-        Avançar
+        <Icon name="svg-spinners:ring-resize" v-show="loading" />
+        {{ form.accountType === "particular" ? "Cadastrar" : "Avançar" }}
       </button>
       <div v-show="step === 2" class="w-full flex gap-2">
         <button
@@ -268,4 +268,97 @@ const onSubmit = async () => {
       </p>
     </div>
   </form>
+  <div
+    v-if="modal"
+    class="w-screen h-screen fixed top-0 left-0 z-50 bg-black/50"
+  >
+    <div class="w-screen h-screen flex justify-center items-center p-6">
+      <div ref="target" class="bg-white max-w-xl p-4 rounded-xl">
+        <h3 class="font-medium text-center">
+          Utilizador Registrado com Sucesso! 🎉
+        </h3>
+
+        <hr class="my-3" />
+
+        <div v-if="form.accountType === 'financial'">
+          <p class="mb-2">
+            Para garantir a segurança e a confiança de todos os nossos
+            utilizadores, contas de entidades financeiras requerem aprovação
+            antes de serem ativadas.
+          </p>
+
+          <p class="font-semibold">O que isso significa?</p>
+          <ul class="pl-6 list-disc">
+            <li class="mb-1">
+              Sua conta será revisada por nossos administradores para assegurar
+              que atende aos nossos critérios de transparência e segurança.
+            </li>
+            <li class="mb-2">
+              Este processo pode levar alguns dias, e nós notificaremos você
+              assim que a revisão for concluída.
+            </li>
+          </ul>
+        </div>
+
+        <div v-if="form.accountType === 'state_owned'">
+          <p class="mb-2">
+            Para garantir a segurança e a confiança de todos os nossos
+            utilizadores, contas de entidades estatais requerem aprovação antes
+            de serem ativadas.
+          </p>
+
+          <p class="font-semibold">O que isso significa?</p>
+          <ul class="pl-6 list-disc">
+            <li class="mb-1">
+              Sua conta será revisada por nossos administradores para assegurar
+              que atende aos nossos critérios de transparência e legitimidade.
+            </li>
+            <li class="mb-2">
+              Este processo pode levar alguns dias, e nós notificaremos você
+              assim que a revisão for concluída.
+            </li>
+          </ul>
+        </div>
+
+        <div v-if="form.accountType === 'particular'">
+          <p class="mb-2">
+            Para completar o processo de verificação e garantir a segurança da
+            sua conta, por favor envie os seguintes documentos para o nosso
+            e-mail:
+          </p>
+
+          <ul class="pl-6 list-disc mb-2">
+            <li class="mb-1">Extrato bancário atualizado</li>
+            <li class="mb-2">Cópia do seu bilhete de identidade</li>
+          </ul>
+
+          <p class="mb-2">E-mail para envio: <b> verificacao@finp2p.ao </b></p>
+
+          <p class="mb-2">
+            Certifique-se de que todos os documentos estejam legíveis e
+            atualizados. Isso ajudará a acelerar o processo de verificação.
+          </p>
+        </div>
+
+        <p>
+          Agradecemos pela paciência e compreensão enquanto trabalhamos juntos
+          para manter uma plataforma confiável para todos.
+        </p>
+
+        <hr class="my-3" />
+
+        <button
+          @click="
+            () => {
+              navigateTo('/app/auth/login');
+              modal = false;
+            }
+          "
+          class="px-4 py-2.5 rounded-md text-white bg-brand-primary transition-all hover:bg-brand-primary-darker"
+        >
+          Compreendi
+        </button>
+      </div>
+    </div>
+  </div>
 </template>

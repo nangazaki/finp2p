@@ -10,7 +10,7 @@ definePageMeta({
       <div
         class="other-login col-span-12 md:col-span-6 h-screen flex justify-center items-center p-6"
       >
-        <div class="max-w-md w-full p-4 bg-white !border rounded-2xl">
+        <div class="max-w-lg w-full p-4 bg-white !border rounded-2xl">
           <h1 class="!text-brand-primary text-center mb-4">FinP2P</h1>
 
           <div class="min-h-[26rem]">
