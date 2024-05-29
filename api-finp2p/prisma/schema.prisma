@@ -14,21 +14,20 @@ enum AccountType {
 }
 
 model User {
-  id          String       @id @default(uuid())
-  firstName   String       @map("first_name")
-  lastName    String       @map("last_name")
-  email       String       @unique
-  password    String
-  isAdmin     Boolean      @default(false)
-  investments Investment[]
+  id            String  @id @default(uuid())
+  firstName     String  @map("first_name")
+  lastName      String  @map("last_name")
+  email         String  @unique
+  password      String
+  isAdmin       Boolean @default(false)
+  accountVerify Boolean @default(false)
 
   createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt
 
-  accountType AccountType?
-
-  entity Entity?
-
-  updatedAt        DateTime           @updatedAt
+  investments      Investment[]
+  accountType      AccountType?
+  entity           Entity?
   ReferencePayment ReferencePayment[]
 
   @@map("users")

@@ -6,6 +6,7 @@ import {
   Get,
   Query,
   Param,
+  Patch,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from './user.service';
@@ -30,8 +31,26 @@ export class UserController {
     return this.userService.findAll(page, perPage);
   }
 
+  @Get('disables')
+  findAllDisables(
+    @Query('page') page: number = 1,
+    @Query('perPage') perPage: number = 10,
+  ) {
+    return this.userService.findAllDisables(page, perPage);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(id);
+  }
+
+  @Patch('active')
+  activeAcount(@Param('id') id: string) {
+    return this.userService.activeAccount(id);
+  }
+
+  @Patch('disable')
+  disableAcount(@Param('id') id: string) {
+    return this.userService.disableAccount(id);
   }
 }

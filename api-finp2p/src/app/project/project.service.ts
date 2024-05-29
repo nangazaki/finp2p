@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   NotFoundException,
@@ -18,6 +19,15 @@ export class ProjectService {
 
   async create(userId: string, createProjectDto: CreateProjectDto) {
     try {
+      if (
+        createProjectDto.amountRequired > 20000000 ||
+        createProjectDto.amountRequired < 0
+      ) {
+        throw new BadRequestException(
+          'O valor do projecto deve estar entre 20M e 500K',
+        );
+      }
+
       if (!createProjectDto.image) {
         throw new Error('Imagem não fornecida');
       }

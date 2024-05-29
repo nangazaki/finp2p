@@ -10,6 +10,7 @@ async function main() {
       isAdmin: true,
       firstName: 'Admin',
       lastName: 'FinP2P',
+      accountVerify: true,
     },
   });
 

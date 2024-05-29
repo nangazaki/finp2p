@@ -83,10 +83,10 @@ export class UserService {
 
       const [total, data] = await Promise.all([
         this.prisma.user.count({
-          where: { isAdmin: false },
+          where: { isAdmin: false, accountVerify: true },
         }),
         this.prisma.user.findMany({
-          where: { isAdmin: false },
+          where: { isAdmin: false, accountVerify: true },
           select: {
             id: true,
             email: true,
@@ -94,6 +94,49 @@ export class UserService {
             lastName: true,
             createdAt: true,
             accountType: true,
+          },
+          orderBy: { createdAt: 'desc' },
+          take: peerPage,
+          skip,
+        }),
+      ]);
+
+      const lastPage = Math.ceil(total / peerPage);
+
+      return {
+        data,
+        meta: {
+          total,
+          lastPage,
+          currentPage: page,
+          peerPage,
+          prev: page > 1 ? page - 1 : null,
+          next: page < lastPage ? page + 1 : null,
+        },
+      };
+    } catch (error) {
+      throw new Error('Erro ao buscar usuários');
+    }
+  }
+
+  async findAllDisables(page: number, peerPage: number) {
+    try {
+      const skip = page > 0 ? peerPage * (page - 1) : 0;
+
+      const [total, data] = await Promise.all([
+        this.prisma.user.count({
+          where: { isAdmin: false, accountVerify: false },
+        }),
+        this.prisma.user.findMany({
+          where: { isAdmin: false, accountVerify: false },
+          select: {
+            id: true,
+            email: true,
+            firstName: true,
+            lastName: true,
+            createdAt: true,
+            accountType: true,
+            accountVerify: true,
           },
           orderBy: { createdAt: 'desc' },
           take: peerPage,
@@ -180,5 +223,29 @@ export class UserService {
     }
   }
 
-  
+  async activeAccount(id: string) {
+    try {
+      await this.prisma.user.update({
+        where: { id },
+        data: { accountVerify: true },
+      });
+
+      return;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async disableAccount(id: string) {
+    try {
+      await this.prisma.user.update({
+        where: { id },
+        data: { accountVerify: false },
+      });
+
+      return;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
