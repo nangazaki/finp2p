@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { format } from "date-fns";
+import { UseImage } from "@vueuse/components";
 
 const { data } = await useFetch(
   `https://finp2p.onrender.com/api/users/${useRoute().params.id}`,
@@ -78,7 +79,21 @@ definePageMeta({
             :key="idx"
             class="w-full p-2 flex gap-2.5 !border border-neutral-300 rounded-md transition-all mb-2 hover:bg-neutral-100"
           >
-            <div class="w-28 h-28 bg-brand-primary rounded-md"></div>
+            <div class="w-28 h-28 rounded-md overflow-hidden">
+              <UseImage
+                :src="`https://ugxrutmbdnievlqtuyng.supabase.co/storage/v1/object/public/uploads/finp2p/${pj.image}`"
+                class="w-full h-full object-cover object-center"
+              >
+                <template #loading>
+                  <div class="w-full h-full bg-neutral-200 animate-pulse" />
+                </template>
+                <template #error>
+                  <img
+                    src="https://cdn4.iconfinder.com/data/icons/ui-beast-4/32/Ui-12-512.png"
+                  />
+                </template>
+              </UseImage>
+            </div>
             <div class="flex-1">
               <nuxt-link
                 :to="{ path: `/app/projectos/${pj.id}` }"
