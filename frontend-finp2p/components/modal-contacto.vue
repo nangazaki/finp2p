@@ -120,13 +120,13 @@ async function onSubmit() {
             <button
               type="button"
               @click="() => useAppModalStore().onModalContact(false)"
-              class="flex-1 p-2 border-2 border-red-600/80 bg-red-600/80 text-lg text-white rounded-full hover:bg-transparent hover:!text-red-600/80 focus:outline-none"
+              class="flex-1 p-1 border-2 border-red-600/80 bg-red-600/80 text-lg text-white rounded-md hover:bg-transparent hover:!text-red-600/80 focus:outline-none"
             >
               Fechar
             </button>
             <button
               type="submit"
-              class="flex-1 p-2 border-2 border-brand-primary bg-brand-primary text-lg text-white rounded-full hover:bg-transparent hover:!text-brand-primary focus:outline-none"
+              class="flex-1 p-1 border-2 border-brand-primary bg-brand-primary text-lg text-white rounded-md hover:bg-transparent hover:!text-brand-primary focus:outline-none"
             >
               <Icon v-show="loading" name="svg-spinners:ring-resize" />
               Enviar

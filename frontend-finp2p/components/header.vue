@@ -7,7 +7,7 @@
         <h1 class="!text-brand-primary">FinP2P</h1>
       </nuxt-link>
 
-      <ul class="text-lg flex items-center gap-4">
+      <ul class="hidden text-lg sm:flex items-center gap-4">
         <li>
           <nuxt-link
             to="/projectos"
@@ -34,7 +34,7 @@
         </li>
         <nuxt-link
           to="/app/auth/login"
-          class="leading-none px-4 py-2.5 border !border-brand-primary rounded-full transition-all hover:bg-brand-primary hover:text-white"
+          class="leading-none px-4 py-2 border !border-brand-primary rounded-md transition-all hover:bg-brand-primary hover:text-white"
         >
           Entrar
         </nuxt-link>

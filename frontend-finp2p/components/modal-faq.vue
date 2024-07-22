@@ -27,14 +27,14 @@ const state = computed(() => useAppModalStore().modalFaq);
           <div
             @click="() => (show = 1)"
             :class="{ 'bg-brand-primary text-white': show === 1 }"
-            class="flex-1 text-center text-lg p-2 border !border-brand-primary rounded-full mb-3 cursor-pointer"
+            class="flex-1 text-center text-lg p-2 border !border-brand-primary rounded-md mb-3 cursor-pointer transition-all"
           >
             Tomador
           </div>
           <div
             @click="() => (show = 2)"
             :class="{ 'bg-brand-primary text-white': show === 2 }"
-            class="flex-1 text-center text-lg p-2 border !border-brand-primary rounded-full mb-3 cursor-pointer"
+            class="flex-1 text-center text-lg p-2 border !border-brand-primary rounded-md mb-3 cursor-pointer transition-all"
           >
             Investidor
           </div>
