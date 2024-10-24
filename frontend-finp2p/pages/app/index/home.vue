@@ -2,7 +2,7 @@
 import { format } from "date-fns";
 import { UseImage } from "@vueuse/components";
 
-const { data: Projects } = await useFetch("https://finp2p.onrender.com/api/project");
+const { data: Projects } = await useFetch("http://localhost:4000/api/project");
 
 definePageMeta({
   middleware: ["auth"],

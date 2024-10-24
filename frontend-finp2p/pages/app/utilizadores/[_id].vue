@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { UseImage } from "@vueuse/components";
 
 const { data } = await useFetch(
-  `https://finp2p.onrender.com/api/users/${useRoute().params.id}`,
+  `http://localhost:4000/api/users/${useRoute().params.id}`,
   {
     method: "GET",
   }

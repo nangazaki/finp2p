@@ -23,11 +23,7 @@ export default defineNuxtConfig({
     "@imgs": resolve(__dirname, "./assets/imgs"),
   },
   css: [
-    "@/styles/simplebar.css",
-    "@/styles/perfect-scrollbar.css",
-    "@/styles/pace.min.css",
     "@/styles/bootstrap.min.css",
-    "@/styles/metisMenu.min.css",
     "@/styles/app.css",
   ],
   modules: [

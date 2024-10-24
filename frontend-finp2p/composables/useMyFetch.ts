@@ -8,7 +8,7 @@ export async function useMyFetch<T>(
   const { headers, method, body, contentType } = options;
 
   const token = authCookie.getToken();
-  const baseURL = "http://localhost:8080/api";
+  const baseURL = "http://localhost:4000/api";
 
   const header = new Headers({
     ...headers,

@@ -30,7 +30,7 @@ async function onSubmit() {
   formData.append("description", form.value.description);
 
   const { status, error } = await useFetch(
-    "https://finp2p.onrender.com/api/project",
+    "http://localhost:4000/api/project",
     {
       method: "POST",
       headers: {

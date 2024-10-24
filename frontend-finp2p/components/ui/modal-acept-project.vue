@@ -16,7 +16,7 @@ async function onSubmit() {
   loading.value = true;
 
   const { status } = await useFetch(
-    `https://finp2p.onrender.com/api/project/${modal.value.info.id}/approve`,
+    `http://localhost:4000/api/project/${modal.value.info.id}/approve`,
     {
       method: "PATCH",
     }

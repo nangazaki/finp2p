@@ -19,7 +19,7 @@ const res = ref<IRes>({
 });
 
 const { data } = await useFetch<IRes>(
-  "https://finp2p.onrender.com/api/users/disables?page=1"
+  "http://localhost:4000/api/users/disables?page=1"
 );
 res.value = data.value;
 
@@ -31,7 +31,7 @@ async function next() {
   const nextPage = Number(res.value.meta.currentPage) + 1;
 
   const { data } = await useFetch<IRes>(
-    `https://finp2p.onrender.com/api/users/disables?page=${nextPage}`
+    `http://localhost:4000/api/users/disables?page=${nextPage}`
   );
 
   res.value = data.value;
@@ -41,7 +41,7 @@ async function previous() {
   const prevPage = Number(res.value.meta.currentPage) - 1;
 
   const { data } = await useFetch<IRes>(
-    `https://finp2p.onrender.com/api/users/disables?page=${prevPage}`
+    `http://localhost:4000/api/users/disables?page=${prevPage}`
   );
 
   res.value = data.value;
@@ -52,7 +52,7 @@ async function onEnableAccount(id: string) {
   loading.value = true;
 
   const { status } = useFetch(
-    `https://finp2p.onrender.com/api/users/active/${id}`,
+    `http://localhost:4000/api/users/active/${id}`,
     {
       method: "PATCH",
     }

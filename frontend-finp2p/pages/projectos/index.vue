@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: Projects } = await useFetch(
-  "https://finp2p.onrender.com/api/project/approveds"
+  "http://localhost:4000/api/project/approveds"
 );
 
 definePageMeta({

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: project } = await useFetch(
-  `https://finp2p.onrender.com/api/project/${useRoute().params.id}`
+  `http://localhost:4000/api/project/${useRoute().params.id}`
 );
 
 definePageMeta({

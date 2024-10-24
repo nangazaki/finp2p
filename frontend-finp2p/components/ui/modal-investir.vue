@@ -47,7 +47,7 @@ async function onSubmit() {
   formData.append("comprovante", form.value.comprovante);
 
   const { status, error } = await useFetch(
-    "https://finp2p.onrender.com/api/investments",
+    "http://localhost:4000/api/investments",
     {
       method: "POST",
       headers: {

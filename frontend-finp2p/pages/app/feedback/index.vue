@@ -15,14 +15,14 @@ const res = ref<IRes>({
   data: [],
   meta: {},
 });
-const { data } = await useFetch<IRes>("https://finp2p.onrender.com/api/feedback");
+const { data } = await useFetch<IRes>("http://localhost:4000/api/feedback");
 res.value = data.value;
 
 async function next() {
   const nextPage = Number(res.value.meta.currentPage) + 1;
 
   const { data } = await useFetch<IRes>(
-    `https://finp2p.onrender.com/api/feedback?page=${nextPage}`
+    `http://localhost:4000/api/feedback?page=${nextPage}`
   );
 
   res.value = data.value;
@@ -32,7 +32,7 @@ async function previous() {
   const prevPage = Number(res.value.meta.currentPage) - 1;
 
   const { data } = await useFetch<IRes>(
-    `https://finp2p.onrender.com/api/feedback?page=${prevPage}`
+    `http://localhost:4000/api/feedback?page=${prevPage}`
   );
 
   res.value = data.value;

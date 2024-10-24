@@ -19,7 +19,7 @@ const onSubmit = async () => {
   const { data, status, error } = await useFetch<{
     userInfo: User;
     token: string;
-  }>("https://finp2p.onrender.com/api/auth/login", {
+  }>("http://localhost:4000/api/auth/login", {
     method: "POST",
     body: {
       ...form.value,

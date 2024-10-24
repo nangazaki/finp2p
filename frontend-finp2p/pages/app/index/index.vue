@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data } = await useFetch("https://finp2p.onrender.com/api/project/data", {
+const { data } = await useFetch("http://localhost:4000/api/project/data", {
   method: "GET",
 });
 

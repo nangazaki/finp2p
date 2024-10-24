@@ -20,7 +20,7 @@ const loading = ref(false);
 async function onDelete() {
   loading.value = true;
   const { status, error } = await useFetch(
-    `https://finp2p.onrender.com/api/feedback/${modal.value?.info.id}`,
+    `http://localhost:4000/api/feedback/${modal.value?.info.id}`,
     {
       method: "DELETE",
     }

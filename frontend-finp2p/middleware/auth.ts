@@ -6,7 +6,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
   if (token) {
     const { data, status } = await useFetch<UserLogged>(
-      "https://finp2p.onrender.com/api/auth/user-logged",
+      "http://localhost:4000/api/auth/user-logged",
       {
         method: "GET",
         headers: {
